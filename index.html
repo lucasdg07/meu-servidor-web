@@ -282,4 +282,18 @@
                 (userChoice === 'paper' && computerChoice === 'rock') ||
                 (userChoice === 'scissors' && computerChoice === 'paper')
             ) {
-                result.textContent = `
+                result.textContent = `Você venceu! ${userChoiceDisplay} vence ${computerChoiceDisplay}.`;
+                result.className = 'win';
+                userWins++;
+            } else {
+                result.textContent = `Você perdeu! ${computerChoiceDisplay} vence ${userChoiceDisplay}.`;
+                result.className = 'lose';
+                computerWins++;
+            }
+
+            updateScoreboard();
+        }
+    </script>
+
+</body>
+</html>

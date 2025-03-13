@@ -20,6 +20,12 @@
             color: #fff;
             text-align: center;
             overflow: hidden;
+
+            /* Imagem lateral ao fundo */
+            background-image: url('https://via.placeholder.com/600x1000'); /* Substitua com a URL da sua imagem */
+            background-size: cover;
+            background-position: center left; /* Alinha a imagem à esquerda */
+            background-repeat: no-repeat;
         }
 
         h1 {
@@ -276,5 +282,4 @@
                 (userChoice === 'paper' && computerChoice === 'rock') ||
                 (userChoice === 'scissors' && computerChoice === 'paper')
             ) {
-                result.textContent = `Você venceu! Você escolheu ${userChoiceDisplay}, e o computador escolheu ${computerChoiceDisplay}.`;
-                result.className = '
+                result.textContent = `

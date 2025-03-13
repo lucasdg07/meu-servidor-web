@@ -20,12 +20,13 @@
             color: #fff;
             text-align: center;
             overflow: hidden;
+            animation: backgroundAnim 15s ease infinite; /* Animação do fundo */
+        }
 
-            /* Imagem lateral ao fundo */
-            background-image: url('https://via.placeholder.com/600x1000'); /* Substitua com a URL da sua imagem */
-            background-size: cover;
-            background-position: center left; /* Alinha a imagem à esquerda */
-            background-repeat: no-repeat;
+        @keyframes backgroundAnim {
+            0% { background: linear-gradient(135deg, #1D2B64, #F8CDDA); }
+            50% { background: linear-gradient(135deg, #F8CDDA, #1D2B64); }
+            100% { background: linear-gradient(135deg, #1D2B64, #F8CDDA); }
         }
 
         h1 {
@@ -102,6 +103,7 @@
             text-align: center;
             line-height: 1.5;
             transition: all 0.3s ease;
+            visibility: hidden; /* Escondido inicialmente */
         }
 
         .win {
@@ -176,88 +178,4 @@
             background: rgba(0, 0, 0, 0.1);
             position: absolute;
             width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-
-        /* Design Responsivo */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            button {
-                font-size: 1.3rem;
-                width: 120px;
-                height: 120px;
-                padding: 20px 30px;
-            }
-
-            #result {
-                width: 80%;
-            }
-
-            #scoreboard {
-                flex-direction: column;
-                gap: 25px;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <h1>Pedra, Papel e Tesoura</h1>
-    <p>Escolha sua jogada e vença o computador!</p>
-
-    <div id="choices">
-        <button onclick="playGame('rock')">
-            <span class="icon">&#129704;</span> Pedra
-        </button>
-        <button onclick="playGame('paper')">
-            <span class="icon">&#128190;</span> Papel
-        </button>
-        <button onclick="playGame('scissors')">
-            <span class="icon">&#9996;</span> Tesoura
-        </button>
-    </div>
-
-    <div id="result"></div>
-
-    <div id="scoreboard">
-        <div class="score" id="userScore">
-            <div class="label">Vitórias</div>
-            <div class="count">0</div>
-            <div class="progress-bar"><div class="progress" id="userProgress"></div></div>
-            <div class="background"></div>
-        </div>
-        <div class="score" id="computerScore">
-            <div class="label">Computador</div>
-            <div class="count">0</div>
-            <div class="progress-bar"><div class="progress" id="computerProgress"></div></div>
-            <div class="background"></div>
-        </div>
-        <div class="score" id="tieScore">
-            <div class="label">Empates</div>
-            <div class="count">0</div>
-            <div class="progress-bar"><div class="progress" id="tieProgress"></div></div>
-            <div class="background"></div>
-        </div>
-    </div>
-
-    <script>
-        let userWins = 0;
-        let computerWins = 0;
-        let ties = 0;
-
-        function updateScoreboard() {
-            // Atualiza as contagens de pontuação
-            document.getElementById("userScore").querySelector(".count").textContent = userWins;
-            document.getElementById("computerScore").querySelector(".count").textContent = computerWins;
-            document.getElementById("tieScore").querySelector(".count").textContent = ties;
-
-            // Atualiza as barras de progresso com base na pontuação
-            const totalGames = userWins + computerWins + ties;
-            document.getElementById("userProgress").style.width = (totalGames > 0 ? (userWins / totalGames * 100) : 0) + '%';
-            document.getElementById("computerProgress").style.width = (totalGames
+            height: 100

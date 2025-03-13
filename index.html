@@ -260,40 +260,4 @@
             // Atualiza as barras de progresso com base na pontuação
             const totalGames = userWins + computerWins + ties;
             document.getElementById("userProgress").style.width = (totalGames > 0 ? (userWins / totalGames * 100) : 0) + '%';
-            document.getElementById("computerProgress").style.width = (totalGames > 0 ? (computerWins / totalGames * 100) : 0) + '%';
-            document.getElementById("tieProgress").style.width = (totalGames > 0 ? (ties / totalGames * 100) : 0) + '%';
-        }
-
-        function playGame(userChoice) {
-            const choices = ['rock', 'paper', 'scissors'];
-            const randomIndex = Math.floor(Math.random() * choices.length);
-            const computerChoice = choices[randomIndex];
-            const result = document.getElementById("result");
-
-            const userChoiceDisplay = userChoice.charAt(0).toUpperCase() + userChoice.slice(1);
-            const computerChoiceDisplay = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
-
-            if (userChoice === computerChoice) {
-                result.textContent = `Empate! Ambos escolheram ${userChoiceDisplay}.`;
-                result.className = 'tie';
-                ties++;
-            } else if (
-                (userChoice === 'rock' && computerChoice === 'scissors') ||
-                (userChoice === 'paper' && computerChoice === 'rock') ||
-                (userChoice === 'scissors' && computerChoice === 'paper')
-            ) {
-                result.textContent = `Você venceu! ${userChoiceDisplay} vence ${computerChoiceDisplay}.`;
-                result.className = 'win';
-                userWins++;
-            } else {
-                result.textContent = `Você perdeu! ${computerChoiceDisplay} vence ${userChoiceDisplay}.`;
-                result.className = 'lose';
-                computerWins++;
-            }
-
-            updateScoreboard();
-        }
-    </script>
-
-</body>
-</html>
+            document.getElementById("computerProgress").style.width = (totalGames

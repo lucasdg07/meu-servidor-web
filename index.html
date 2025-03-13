@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedra, Papel e Tesoura</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         /* Estilos Globais */
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Rubik', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #FF7E5F, #FEB47B);
+            background: linear-gradient(135deg, #1D2B64, #F8CDDA); /* Gradiente suave */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -19,135 +19,161 @@
             flex-direction: column;
             color: #fff;
             text-align: center;
+            overflow: hidden;
         }
 
         h1 {
             font-size: 4rem;
             margin: 0;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
-            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+            letter-spacing: 5px;
+            font-weight: 700;
+            text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.4);
         }
 
         p {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             margin-top: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            font-weight: 500;
         }
 
         #choices {
             display: flex;
-            gap: 20px;
+            gap: 30px;
             justify-content: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         button {
             background-color: #fff;
             color: #333;
             font-size: 1.5rem;
-            padding: 20px 30px;
+            padding: 25px 40px;
             border: none;
             border-radius: 50%;
             cursor: pointer;
-            transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 120px;
-            height: 120px;
+            width: 150px;
+            height: 150px;
             font-weight: 600;
+            position: relative;
         }
 
         button:hover {
             transform: scale(1.1);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background-color: #FFB400;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
 
         button:active {
             transform: scale(0.95);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-right: 15px;
         }
 
         #result {
             font-size: 1.8rem;
             font-weight: 600;
             margin-top: 30px;
-            padding: 20px;
-            border-radius: 12px;
-            background-color: rgba(255, 255, 255, 0.3);
+            padding: 25px 35px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.4);
             width: 60%;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
             text-align: center;
-            line-height: 1.4;
+            line-height: 1.5;
+            transition: all 0.3s ease;
         }
 
         .win {
             color: #27ae60;
+            text-shadow: 2px 2px 10px rgba(0, 255, 0, 0.2);
         }
 
         .lose {
             color: #e74c3c;
+            text-shadow: 2px 2px 10px rgba(255, 0, 0, 0.2);
         }
 
         .tie {
             color: #f39c12;
+            text-shadow: 2px 2px 10px rgba(255, 255, 0, 0.2);
         }
 
-        /* Painel de Pontuação com detalhes visuais */
         #scoreboard {
             display: flex;
             justify-content: center;
-            gap: 40px;
-            margin-top: 30px;
+            gap: 50px;
+            margin-top: 40px;
             font-size: 1.5rem;
             font-weight: 600;
         }
 
         .score {
             background-color: rgba(255, 255, 255, 0.2);
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: 120px;
+            width: 150px;
+            height: 180px;
+            position: relative;
+            overflow: hidden;
         }
 
         .score .label {
-            font-size: 1rem;
+            font-size: 1.2rem;
             color: #ddd;
+            margin-bottom: 15px;
         }
 
         .score .count {
-            font-size: 2rem;
+            font-size: 3rem;
             color: #fff;
-            font-weight: bold;
+            font-weight: 700;
         }
 
         .score .progress-bar {
-            width: 80%;
+            width: 100%;
             height: 8px;
             border-radius: 8px;
-            margin-top: 5px;
+            margin-top: 10px;
             background: #fff;
             position: relative;
+            overflow: hidden;
         }
 
         .score .progress {
             height: 100%;
             border-radius: 8px;
             background-color: #27ae60;
+            transition: width 0.3s ease;
         }
 
-        /* Estilos dos ícones */
-        .icon {
-            font-size: 3rem;
-            margin-right: 10px;
+        .score .background {
+            background: rgba(0, 0, 0, 0.1);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
         }
 
         /* Design Responsivo */
@@ -157,9 +183,10 @@
             }
 
             button {
-                font-size: 1.2rem;
-                width: 100px;
-                height: 100px;
+                font-size: 1.3rem;
+                width: 120px;
+                height: 120px;
+                padding: 20px 30px;
             }
 
             #result {
@@ -168,7 +195,7 @@
 
             #scoreboard {
                 flex-direction: column;
-                gap: 20px;
+                gap: 25px;
             }
         }
     </style>
@@ -176,7 +203,7 @@
 <body>
 
     <h1>Pedra, Papel e Tesoura</h1>
-    <p>Escolha sua jogada:</p>
+    <p>Escolha sua jogada e vença o computador!</p>
 
     <div id="choices">
         <button onclick="playGame('rock')">
@@ -197,16 +224,19 @@
             <div class="label">Vitórias</div>
             <div class="count">0</div>
             <div class="progress-bar"><div class="progress" id="userProgress"></div></div>
+            <div class="background"></div>
         </div>
         <div class="score" id="computerScore">
             <div class="label">Computador</div>
             <div class="count">0</div>
             <div class="progress-bar"><div class="progress" id="computerProgress"></div></div>
+            <div class="background"></div>
         </div>
         <div class="score" id="tieScore">
             <div class="label">Empates</div>
             <div class="count">0</div>
             <div class="progress-bar"><div class="progress" id="tieProgress"></div></div>
+            <div class="background"></div>
         </div>
     </div>
 
@@ -222,9 +252,10 @@
             document.getElementById("tieScore").querySelector(".count").textContent = ties;
 
             // Atualiza as barras de progresso com base na pontuação
-            document.getElementById("userProgress").style.width = (userWins / (userWins + computerWins + ties) * 100) + '%';
-            document.getElementById("computerProgress").style.width = (computerWins / (userWins + computerWins + ties) * 100) + '%';
-            document.getElementById("tieProgress").style.width = (ties / (userWins + computerWins + ties) * 100) + '%';
+            const totalGames = userWins + computerWins + ties;
+            document.getElementById("userProgress").style.width = (totalGames > 0 ? (userWins / totalGames * 100) : 0) + '%';
+            document.getElementById("computerProgress").style.width = (totalGames > 0 ? (computerWins / totalGames * 100) : 0) + '%';
+            document.getElementById("tieProgress").style.width = (totalGames > 0 ? (ties / totalGames * 100) : 0) + '%';
         }
 
         function playGame(userChoice) {
@@ -246,18 +277,4 @@
                 (userChoice === 'scissors' && computerChoice === 'paper')
             ) {
                 result.textContent = `Você venceu! Você escolheu ${userChoiceDisplay}, e o computador escolheu ${computerChoiceDisplay}.`;
-                result.className = 'win';
-                userWins++;
-            } else {
-                result.textContent = `Computador venceu! Você escolheu ${userChoiceDisplay}, e o computador escolheu ${computerChoiceDisplay}.`;
-                result.className = 'lose';
-                computerWins++;
-            }
-
-            // Atualiza o painel de pontuação
-            updateScoreboard();
-        }
-    </script>
-
-</body>
-</html>
+                result.className = '

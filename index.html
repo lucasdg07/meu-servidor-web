@@ -4,70 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock, Paper, Scissors</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        /* Global Styles */
         body {
-            background-color: #f7fafc;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-        }
-        
-        h1 {
-            color: #2c3e50;
-            font-size: 3.5em;
-            margin: 50px 0 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        p {
-            font-size: 1.5em;
-            color: #34495e;
-            margin: 10px 0;
-        }
-        
-        #choices {
+            background: linear-gradient(135deg, #ff9a8b, #ff6a88, #d66a6a);
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-top: 40px;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+            color: #fff;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        #choices {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
         }
 
         button {
-            padding: 20px 40px;
-            font-size: 1.2em;
-            color: #fff;
-            background-color: #2980b9;
+            background-color: #fff;
+            color: #333;
+            font-size: 1.5rem;
+            padding: 20px 30px;
             border: none;
             border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+            height: 150px;
+            font-weight: 600;
+            text-transform: capitalize;
         }
 
         button:hover {
-            background-color: #3498db;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         button:active {
-            transform: translateY(0);
-            background-color: #1f618d;
+            transform: scale(0.95);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         #result {
-            margin-top: 40px;
-            font-size: 2em;
-            font-weight: bold;
-            color: #34495e;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-top: 30px;
             padding: 20px;
-            background-color: #ecf0f1;
             border-radius: 12px;
+            background-color: rgba(255, 255, 255, 0.3);
             width: 60%;
-            margin-left: auto;
-            margin-right: auto;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            line-height: 1.4;
         }
 
         .win {
@@ -82,15 +97,22 @@
             color: #f39c12;
         }
 
+        /* Icon Styles */
+        .icon {
+            font-size: 3rem;
+            margin-right: 10px;
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.5em;
+                font-size: 2.5rem;
             }
 
             button {
-                font-size: 1.1em;
-                padding: 15px 30px;
+                font-size: 1.2rem;
+                width: 120px;
+                height: 120px;
             }
 
             #result {
@@ -102,26 +124,31 @@
 <body>
 
     <h1>Rock, Paper, Scissors</h1>
-    <p>Choose your move below:</p>
-    
+    <p>Choose your move:</p>
+
     <div id="choices">
-        <button onclick="playGame('rock')">Rock</button>
-        <button onclick="playGame('paper')">Paper</button>
-        <button onclick="playGame('scissors')">Scissors</button>
+        <button onclick="playGame('rock')">
+            <span class="icon">&#129704;</span> Rock
+        </button>
+        <button onclick="playGame('paper')">
+            <span class="icon">&#128190;</span> Paper
+        </button>
+        <button onclick="playGame('scissors')">
+            <span class="icon">&#9996;</span> Scissors
+        </button>
     </div>
-    
-    <p id="result"></p>
+
+    <div id="result"></div>
 
     <script>
         function playGame(userChoice) {
-            var choices = ['rock', 'paper', 'scissors'];
-            var randomIndex = Math.floor(Math.random() * choices.length);
-            var computerChoice = choices[randomIndex];
-            var result = document.getElementById("result");
+            const choices = ['rock', 'paper', 'scissors'];
+            const randomIndex = Math.floor(Math.random() * choices.length);
+            const computerChoice = choices[randomIndex];
+            const result = document.getElementById("result");
 
-            // Display the choices for both user and computer
-            var userChoiceDisplay = userChoice.charAt(0).toUpperCase() + userChoice.slice(1);
-            var computerChoiceDisplay = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
+            const userChoiceDisplay = userChoice.charAt(0).toUpperCase() + userChoice.slice(1);
+            const computerChoiceDisplay = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
 
             if (userChoice === computerChoice) {
                 result.textContent = `It's a tie! Both chose ${userChoiceDisplay}.`;
@@ -131,10 +158,10 @@
                 (userChoice === 'paper' && computerChoice === 'rock') ||
                 (userChoice === 'scissors' && computerChoice === 'paper')
             ) {
-                result.textContent = `You win! You chose ${userChoiceDisplay} and the computer chose ${computerChoiceDisplay}.`;
+                result.textContent = `You win! You chose ${userChoiceDisplay}, and the computer chose ${computerChoiceDisplay}.`;
                 result.className = 'win';
             } else {
-                result.textContent = `Computer wins! You chose ${userChoiceDisplay} and the computer chose ${computerChoiceDisplay}.`;
+                result.textContent = `Computer wins! You chose ${userChoiceDisplay}, and the computer chose ${computerChoiceDisplay}.`;
                 result.className = 'lose';
             }
         }

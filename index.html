@@ -97,6 +97,22 @@
             color: #f39c12;
         }
 
+        /* Counter Styles */
+        #scoreboard {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+            font-size: 1.5rem;
+        }
+
+        .score {
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
         /* Icon Styles */
         .icon {
             font-size: 3rem;
@@ -117,6 +133,11 @@
 
             #result {
                 width: 80%;
+            }
+
+            #scoreboard {
+                flex-direction: column;
+                gap: 20px;
             }
         }
     </style>
@@ -140,7 +161,17 @@
 
     <div id="result"></div>
 
+    <div id="scoreboard">
+        <div class="score" id="userScore">Wins: 0</div>
+        <div class="score" id="computerScore">Computer: 0</div>
+        <div class="score" id="tieScore">Ties: 0</div>
+    </div>
+
     <script>
+        let userWins = 0;
+        let computerWins = 0;
+        let ties = 0;
+
         function playGame(userChoice) {
             const choices = ['rock', 'paper', 'scissors'];
             const randomIndex = Math.floor(Math.random() * choices.length);
@@ -153,6 +184,8 @@
             if (userChoice === computerChoice) {
                 result.textContent = `It's a tie! Both chose ${userChoiceDisplay}.`;
                 result.className = 'tie';
+                ties++;
+                document.getElementById("tieScore").textContent = `Ties: ${ties}`;
             } else if (
                 (userChoice === 'rock' && computerChoice === 'scissors') ||
                 (userChoice === 'paper' && computerChoice === 'rock') ||
@@ -160,9 +193,13 @@
             ) {
                 result.textContent = `You win! You chose ${userChoiceDisplay}, and the computer chose ${computerChoiceDisplay}.`;
                 result.className = 'win';
+                userWins++;
+                document.getElementById("userScore").textContent = `Wins: ${userWins}`;
             } else {
                 result.textContent = `Computer wins! You chose ${userChoiceDisplay}, and the computer chose ${computerChoiceDisplay}.`;
                 result.className = 'lose';
+                computerWins++;
+                document.getElementById("computerScore").textContent = `Computer: ${computerWins}`;
             }
         }
     </script>

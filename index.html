@@ -6,70 +6,91 @@
     <title>Rock, Paper, Scissors</title>
     <style>
         body {
-            background-color: #f3f4f6;
+            background-color: #f7fafc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            font-family: 'Arial', sans-serif;
-            padding: 20px;
+            margin: 0;
+            padding: 0;
         }
         
         h1 {
-            color: #2b2d42;
-            font-size: 3em;
-            margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 3.5em;
+            margin: 50px 0 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
-
+        
         p {
-            font-size: 1.2em;
-            color: #2b2d42;
+            font-size: 1.5em;
+            color: #34495e;
+            margin: 10px 0;
         }
-
+        
         #choices {
             display: flex;
             justify-content: center;
-            margin-top: 20px;
-            gap: 15px;
+            gap: 30px;
+            margin-top: 40px;
         }
 
         button {
-            padding: 15px 30px;
+            padding: 20px 40px;
             font-size: 1.2em;
-            background-color: #007BFF;
-            color: white;
+            color: #fff;
+            background-color: #2980b9;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         }
 
         button:hover {
-            background-color: #0056b3;
-            transform: scale(1.1);
+            background-color: #3498db;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
         button:active {
-            transform: scale(0.98);
+            transform: translateY(0);
+            background-color: #1f618d;
         }
 
         #result {
-            margin-top: 30px;
-            font-size: 1.5em;
+            margin-top: 40px;
+            font-size: 2em;
             font-weight: bold;
-            color: #333;
-            padding: 10px;
-            background-color: #f4f4f9;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            width: 50%;
+            color: #34495e;
+            padding: 20px;
+            background-color: #ecf0f1;
+            border-radius: 12px;
+            width: 60%;
             margin-left: auto;
             margin-right: auto;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .win {
+            color: #27ae60;
+        }
+
+        .lose {
+            color: #e74c3c;
+        }
+
+        .tie {
+            color: #f39c12;
         }
 
         /* Responsive design */
         @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
             button {
-                padding: 12px 25px;
-                font-size: 1em;
+                font-size: 1.1em;
+                padding: 15px 30px;
             }
 
             #result {
@@ -81,7 +102,7 @@
 <body>
 
     <h1>Rock, Paper, Scissors</h1>
-    <p>Select your choice:</p>
+    <p>Choose your move below:</p>
     
     <div id="choices">
         <button onclick="playGame('rock')">Rock</button>
@@ -98,23 +119,26 @@
             var computerChoice = choices[randomIndex];
             var result = document.getElementById("result");
 
+            // Display the choices for both user and computer
+            var userChoiceDisplay = userChoice.charAt(0).toUpperCase() + userChoice.slice(1);
+            var computerChoiceDisplay = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
+
             if (userChoice === computerChoice) {
-                result.textContent = "It's a tie!";
-                result.style.color = "#f39c12";
+                result.textContent = `It's a tie! Both chose ${userChoiceDisplay}.`;
+                result.className = 'tie';
             } else if (
                 (userChoice === 'rock' && computerChoice === 'scissors') ||
                 (userChoice === 'paper' && computerChoice === 'rock') ||
                 (userChoice === 'scissors' && computerChoice === 'paper')
             ) {
-                result.textContent = "You win!";
-                result.style.color = "#2ecc71";
+                result.textContent = `You win! You chose ${userChoiceDisplay} and the computer chose ${computerChoiceDisplay}.`;
+                result.className = 'win';
             } else {
-                result.textContent = "Computer wins!";
-                result.style.color = "#e74c3c";
+                result.textContent = `Computer wins! You chose ${userChoiceDisplay} and the computer chose ${computerChoiceDisplay}.`;
+                result.className = 'lose';
             }
         }
     </script>
-
 
 </body>
 </html>

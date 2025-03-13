@@ -11,14 +11,14 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #ff9a8b, #ff6a88, #d66a6a);
+            background: linear-gradient(135deg, #FF7E5F, #FEB47B);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             flex-direction: column;
-            text-align: center;
             color: #fff;
+            text-align: center;
         }
 
         h1 {
@@ -49,17 +49,16 @@
             font-size: 1.5rem;
             padding: 20px 30px;
             border: none;
-            border-radius: 12px;
+            border-radius: 50%;
             cursor: pointer;
             transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             font-weight: 600;
-            text-transform: capitalize;
         }
 
         button:hover {
@@ -97,20 +96,52 @@
             color: #f39c12;
         }
 
-        /* Counter Styles */
+        /* Scoreboard with detailed visual */
         #scoreboard {
             display: flex;
             justify-content: center;
             gap: 40px;
-            margin-top: 20px;
+            margin-top: 30px;
             font-size: 1.5rem;
+            font-weight: 600;
         }
 
         .score {
-            background-color: rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.2);
             padding: 15px 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 120px;
+        }
+
+        .score .label {
+            font-size: 1rem;
+            color: #ddd;
+        }
+
+        .score .count {
+            font-size: 2rem;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .score .progress-bar {
+            width: 80%;
+            height: 8px;
+            border-radius: 8px;
+            margin-top: 5px;
+            background: #fff;
+            position: relative;
+        }
+
+        .score .progress {
+            height: 100%;
+            border-radius: 8px;
+            background-color: #27ae60;
         }
 
         /* Icon Styles */
@@ -127,8 +158,8 @@
 
             button {
                 font-size: 1.2rem;
-                width: 120px;
-                height: 120px;
+                width: 100px;
+                height: 100px;
             }
 
             #result {
@@ -162,15 +193,39 @@
     <div id="result"></div>
 
     <div id="scoreboard">
-        <div class="score" id="userScore">Wins: 0</div>
-        <div class="score" id="computerScore">Computer: 0</div>
-        <div class="score" id="tieScore">Ties: 0</div>
+        <div class="score" id="userScore">
+            <div class="label">Wins</div>
+            <div class="count">0</div>
+            <div class="progress-bar"><div class="progress" id="userProgress"></div></div>
+        </div>
+        <div class="score" id="computerScore">
+            <div class="label">Computer</div>
+            <div class="count">0</div>
+            <div class="progress-bar"><div class="progress" id="computerProgress"></div></div>
+        </div>
+        <div class="score" id="tieScore">
+            <div class="label">Ties</div>
+            <div class="count">0</div>
+            <div class="progress-bar"><div class="progress" id="tieProgress"></div></div>
+        </div>
     </div>
 
     <script>
         let userWins = 0;
         let computerWins = 0;
         let ties = 0;
+
+        function updateScoreboard() {
+            // Update score counts
+            document.getElementById("userScore").querySelector(".count").textContent = userWins;
+            document.getElementById("computerScore").querySelector(".count").textContent = computerWins;
+            document.getElementById("tieScore").querySelector(".count").textContent = ties;
+
+            // Update progress bars based on score
+            document.getElementById("userProgress").style.width = (userWins / (userWins + computerWins + ties) * 100) + '%';
+            document.getElementById("computerProgress").style.width = (computerWins / (userWins + computerWins + ties) * 100) + '%';
+            document.getElementById("tieProgress").style.width = (ties / (userWins + computerWins + ties) * 100) + '%';
+        }
 
         function playGame(userChoice) {
             const choices = ['rock', 'paper', 'scissors'];
@@ -185,7 +240,6 @@
                 result.textContent = `It's a tie! Both chose ${userChoiceDisplay}.`;
                 result.className = 'tie';
                 ties++;
-                document.getElementById("tieScore").textContent = `Ties: ${ties}`;
             } else if (
                 (userChoice === 'rock' && computerChoice === 'scissors') ||
                 (userChoice === 'paper' && computerChoice === 'rock') ||
@@ -194,13 +248,14 @@
                 result.textContent = `You win! You chose ${userChoiceDisplay}, and the computer chose ${computerChoiceDisplay}.`;
                 result.className = 'win';
                 userWins++;
-                document.getElementById("userScore").textContent = `Wins: ${userWins}`;
             } else {
                 result.textContent = `Computer wins! You chose ${userChoiceDisplay}, and the computer chose ${computerChoiceDisplay}.`;
                 result.className = 'lose';
                 computerWins++;
-                document.getElementById("computerScore").textContent = `Computer: ${computerWins}`;
             }
+
+            // Update the scoreboard
+            updateScoreboard();
         }
     </script>
 

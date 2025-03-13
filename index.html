@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock, Paper, Scissors</title>
+    <title>Pedra, Papel e Tesoura</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* Global Styles */
+        /* Estilos Globais */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
@@ -96,7 +96,7 @@
             color: #f39c12;
         }
 
-        /* Scoreboard with detailed visual */
+        /* Painel de Pontuação com detalhes visuais */
         #scoreboard {
             display: flex;
             justify-content: center;
@@ -144,13 +144,13 @@
             background-color: #27ae60;
         }
 
-        /* Icon Styles */
+        /* Estilos dos ícones */
         .icon {
             font-size: 3rem;
             margin-right: 10px;
         }
 
-        /* Responsive design */
+        /* Design Responsivo */
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
@@ -175,18 +175,18 @@
 </head>
 <body>
 
-    <h1>Rock, Paper, Scissors</h1>
-    <p>Choose your move:</p>
+    <h1>Pedra, Papel e Tesoura</h1>
+    <p>Escolha sua jogada:</p>
 
     <div id="choices">
         <button onclick="playGame('rock')">
-            <span class="icon">&#129704;</span> Rock
+            <span class="icon">&#129704;</span> Pedra
         </button>
         <button onclick="playGame('paper')">
-            <span class="icon">&#128190;</span> Paper
+            <span class="icon">&#128190;</span> Papel
         </button>
         <button onclick="playGame('scissors')">
-            <span class="icon">&#9996;</span> Scissors
+            <span class="icon">&#9996;</span> Tesoura
         </button>
     </div>
 
@@ -194,17 +194,17 @@
 
     <div id="scoreboard">
         <div class="score" id="userScore">
-            <div class="label">Wins</div>
+            <div class="label">Vitórias</div>
             <div class="count">0</div>
             <div class="progress-bar"><div class="progress" id="userProgress"></div></div>
         </div>
         <div class="score" id="computerScore">
-            <div class="label">Computer</div>
+            <div class="label">Computador</div>
             <div class="count">0</div>
             <div class="progress-bar"><div class="progress" id="computerProgress"></div></div>
         </div>
         <div class="score" id="tieScore">
-            <div class="label">Ties</div>
+            <div class="label">Empates</div>
             <div class="count">0</div>
             <div class="progress-bar"><div class="progress" id="tieProgress"></div></div>
         </div>
@@ -216,12 +216,12 @@
         let ties = 0;
 
         function updateScoreboard() {
-            // Update score counts
+            // Atualiza as contagens de pontuação
             document.getElementById("userScore").querySelector(".count").textContent = userWins;
             document.getElementById("computerScore").querySelector(".count").textContent = computerWins;
             document.getElementById("tieScore").querySelector(".count").textContent = ties;
 
-            // Update progress bars based on score
+            // Atualiza as barras de progresso com base na pontuação
             document.getElementById("userProgress").style.width = (userWins / (userWins + computerWins + ties) * 100) + '%';
             document.getElementById("computerProgress").style.width = (computerWins / (userWins + computerWins + ties) * 100) + '%';
             document.getElementById("tieProgress").style.width = (ties / (userWins + computerWins + ties) * 100) + '%';
@@ -237,7 +237,7 @@
             const computerChoiceDisplay = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
 
             if (userChoice === computerChoice) {
-                result.textContent = `It's a tie! Both chose ${userChoiceDisplay}.`;
+                result.textContent = `Empate! Ambos escolheram ${userChoiceDisplay}.`;
                 result.className = 'tie';
                 ties++;
             } else if (
@@ -245,16 +245,16 @@
                 (userChoice === 'paper' && computerChoice === 'rock') ||
                 (userChoice === 'scissors' && computerChoice === 'paper')
             ) {
-                result.textContent = `You win! You chose ${userChoiceDisplay}, and the computer chose ${computerChoiceDisplay}.`;
+                result.textContent = `Você venceu! Você escolheu ${userChoiceDisplay}, e o computador escolheu ${computerChoiceDisplay}.`;
                 result.className = 'win';
                 userWins++;
             } else {
-                result.textContent = `Computer wins! You chose ${userChoiceDisplay}, and the computer chose ${computerChoiceDisplay}.`;
+                result.textContent = `Computador venceu! Você escolheu ${userChoiceDisplay}, e o computador escolheu ${computerChoiceDisplay}.`;
                 result.className = 'lose';
                 computerWins++;
             }
 
-            // Update the scoreboard
+            // Atualiza o painel de pontuação
             updateScoreboard();
         }
     </script>

@@ -1,42 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock, Paper, Scissors</title>
     <style>
         body {
+            background-color: #f3f4f6;
             text-align: center;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
         }
         
         h1 {
-            color: #333;
+            color: #2b2d42;
+            font-size: 3em;
+            margin-bottom: 20px;
         }
-        
+
+        p {
+            font-size: 1.2em;
+            color: #2b2d42;
+        }
+
         #choices {
+            display: flex;
+            justify-content: center;
             margin-top: 20px;
+            gap: 15px;
         }
-        
+
         button {
-            margin: 5px;
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
             cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
-        
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
         #result {
-            margin-top: 20px;
-            font-size: 18px;
+            margin-top: 30px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+            padding: 10px;
+            background-color: #f4f4f9;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            button {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+
+            #result {
+                width: 80%;
+            }
         }
     </style>
 </head>
 <body>
+
     <h1>Rock, Paper, Scissors</h1>
     <p>Select your choice:</p>
+    
     <div id="choices">
         <button onclick="playGame('rock')">Rock</button>
         <button onclick="playGame('paper')">Paper</button>
         <button onclick="playGame('scissors')">Scissors</button>
     </div>
+    
     <p id="result"></p>
 
     <script>
@@ -45,19 +97,23 @@
             var randomIndex = Math.floor(Math.random() * choices.length);
             var computerChoice = choices[randomIndex];
             var result = document.getElementById("result");
-            
+
             if (userChoice === computerChoice) {
                 result.textContent = "It's a tie!";
+                result.style.color = "#f39c12";
             } else if (
                 (userChoice === 'rock' && computerChoice === 'scissors') ||
                 (userChoice === 'paper' && computerChoice === 'rock') ||
                 (userChoice === 'scissors' && computerChoice === 'paper')
             ) {
                 result.textContent = "You win!";
+                result.style.color = "#2ecc71";
             } else {
                 result.textContent = "Computer wins!";
+                result.style.color = "#e74c3c";
             }
         }
     </script>
+
 </body>
 </html>
